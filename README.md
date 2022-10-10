@@ -1,6 +1,6 @@
 # nft_minter_web
 
-A new Flutter project.
+Flutter web app for generating metadata file and publishing it to ipfs to mint NFTs.
 
 ## Getting Started
 
