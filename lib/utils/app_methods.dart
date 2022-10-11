@@ -37,7 +37,7 @@ class AppMethods {
           await pinataClient.uploadFileToPinata(imageBytes!, image.name);
       return url;
     } catch (e) {
-      debugPrint("Upload Image error " + e.toString());
+      print(e);
       rethrow;
     }
   }
@@ -52,8 +52,14 @@ class AppMethods {
     try {
       Random random = Random();
       final fileName = image.name + random.nextInt(1919).toString() + ".json";
+      String validDescription = "";
+      if (nftDescription.contains("\n")) {
+        validDescription = nftDescription.replaceAll("\n", "\\n");
+      } else {
+        validDescription = nftDescription;
+      }
       String metaString =
-          "{\"name\":\"$nftName\",\"description\":\"$nftDescription\",\"image\":\"$imageUrl\",\"external_url\":\"\",\"attributes\":[{\"trait_type\":\"Rarity\",\"value\":\"$type\"}]}";
+          "{\"name\":\"$nftName\",\"description\":\"$validDescription\",\"image\":\"$imageUrl\",\"external_url\":\"\",\"attributes\":[{\"trait_type\":\"Rarity\",\"value\":\"$type\"}]}";
 
       var blob = webFile.Blob([metaString], 'text/plain', 'native');
 
